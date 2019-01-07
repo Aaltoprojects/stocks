@@ -21,7 +21,8 @@ df = pd.read_excel('tsla.xlsx', parse_dates = True, index_col = 0)
 
 #print(df.head())
 
-
+# tutorial part 3 next:
+# https://www.youtube.com/watch?v=QAkOnV1-lIg
 
 df['Adj Close'].plot()
 plt.show()
