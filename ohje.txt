@@ -1,0 +1,20 @@
+#1 ensimmäinen vaihe
+
+git add tiedostonnimi
+
+
+#2 tallenna muutokset:
+
+git commit -m "kommentti" tiedostonnimi
+
+
+#3 päivitä pilvipalvelu:
+
+git push -u origin master
+
+
+
+#tällä komennolla voit
+#tarkastaa gitin tilan:
+
+git status
