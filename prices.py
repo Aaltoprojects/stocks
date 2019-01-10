@@ -16,7 +16,7 @@ df = web.DataReader('TSLA', 'yahoo', start, end)
 #read this excel file to a dataframe
 df = pd.read_excel('tsla.xlsx', parse_dates = True, index_col = 0)
 
-#print(df.head())
+print(df.head())
 
 # tutorial part 3 next:
 # https://www.youtube.com/watch?v=QAkOnV1-lIg
