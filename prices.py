@@ -7,11 +7,14 @@ import pandas_datareader.data as web
 style.use('ggplot')
 
 #select the time period of the stock data
-start = dt.datetime(2018,1,1)
+start = dt.datetime(2016,1,1)
 end = dt.datetime(2018,12,31)
 
 #save the price data of Tesla from yahoo finance api to a dataframe variable
 df = web.DataReader('TSLA', 'yahoo', start, end)
+
+#create an excel file from the data
+df.to_excel('tsla.xlsx')
 
 #read this excel file to a dataframe
 df = pd.read_excel('tsla.xlsx', parse_dates = True, index_col = 0)
@@ -24,7 +27,7 @@ print(df.head())
 #df['Adj Close'].plot()
 #plt.show()
 
-df['100ma'] = df['Adj Close'].rolling(window=30, min_periods=0).mean()
+df['100ma'] = df['Adj Close'].rolling(window=100, min_periods=0).mean()
 df.dropna(inplace=True)
 
 df['Adj Close'].plot()
