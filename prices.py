@@ -53,7 +53,7 @@ def volumechangecorr(numofcos):
 #creates dictionary of ids and dataframes
 dict = {}
 
-for i in range(5):
+for i in range(500):
 	if names[i+1] != names[i]:
 		try:	
 			df = web.DataReader(ids[i+1], 'yahoo', start, end)
