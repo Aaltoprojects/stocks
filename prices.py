@@ -1,4 +1,5 @@
 import datetime as dt
+import time
 import matplotlib.pyplot as plt
 from matplotlib import style
 import pandas as pd
@@ -7,6 +8,7 @@ import numpy as np
 import scipy as sp
 import xlrd
 import xlsxwriter
+import pickle
 
 style.use('ggplot')
 
@@ -24,7 +26,6 @@ def correlation(name):
 	vol = df['Volume']
 	return vol.corr(change)
 
-correlations = []
 names = []
 ids = []
 
@@ -32,25 +33,54 @@ for i in range(3427):
 	names.append(str(sheet.cell_value(i+1, 1)))
 	ids.append(str(sheet.cell_value(i+1, 0)))
 
-#max index 3428
-for i in range(10):
+def volumechangecorr(numofcos):
+
+	correlations = []
+
+	#max index 3428
+	for i in range(numofcos):
+		if names[i+1] != names[i]:
+			try:
+				correlations.append(correlation(ids[i+1]))
+				print(correlation(ids[i+1]))
+				print(names[i+1] + '\n')
+			except KeyError:
+				print('No price data\n')
+		else: print('Bad stock\n')
+	return
+
+
+#creates dictionary of ids and dataframes
+dict = {}
+
+for i in range(2):
 	if names[i+1] != names[i]:
-		try:
-			correlations.append(correlation(ids[i+1]))
-			print(correlation(ids[i+1]))
+		try:	
+			df = web.DataReader(ids[i+1], 'yahoo', start, end)
+			dict[ids[i+1]] = df
 			print(names[i+1] + '\n')
 		except KeyError:
 			print('No price data\n')
 	else: print('Bad stock\n')
 
-print('Average:')
-print(np.mean(correlations))
-print('Variance:')
-print(np.var(correlations))
+#write dataframes to .obj file
+file = open('dataframes.obj', 'wb')
+pickle.dump(dict, file)
 
-correlations.sort()
-plt.plot(correlations)
-plt.show()
+#read dataframes from .obj file
+file2 = open('dataframes.obj', 'rb')
+testi = pickle.load(file2)
+print(testi)
+
+
+
+
+
+#correlations.sort()
+#plt.plot(correlations)
+#plt.show()
+
+
 
 #create an excel file from the data
 #df.to_excel('AAPL.xlsx')
