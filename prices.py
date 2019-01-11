@@ -53,7 +53,7 @@ def volumechangecorr(numofcos):
 #creates dictionary of ids and dataframes
 dict = {}
 
-for i in range(2):
+for i in range(5):
 	if names[i+1] != names[i]:
 		try:	
 			df = web.DataReader(ids[i+1], 'yahoo', start, end)
@@ -66,14 +66,12 @@ for i in range(2):
 #write dataframes to .obj file
 file = open('dataframes.obj', 'wb')
 pickle.dump(dict, file)
+file.close()
 
 #read dataframes from .obj file
-file2 = open('dataframes.obj', 'rb')
-testi = pickle.load(file2)
-print(testi)
-
-
-
+#file2 = open('dataframes.obj', 'rb')
+#testi = pickle.load(file2)
+#file2.close()
 
 
 #correlations.sort()
