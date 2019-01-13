@@ -32,7 +32,7 @@ ids = []
 for i in range(3427):
 	names.append(str(sheet.cell_value(i+1, 1)))
 	ids.append(str(sheet.cell_value(i+1, 0)))
-
+names.append('lisaa')
 def volumechangecorr(numofcos):
 
 	correlations = []
@@ -53,13 +53,14 @@ def volumechangecorr(numofcos):
 #creates dictionary of ids and dataframes
 dict = {}
 
-for i in range(500):
+for i in range(3427):
 	if names[i+1] != names[i]:
-		try:	
+		try:
+			time.sleep(3)
 			df = web.DataReader(ids[i+1], 'yahoo', start, end)
 			dict[ids[i+1]] = df
 			print(names[i+1] + '\n')
-		except KeyError:
+		except:
 			print('No price data\n')
 	else: print('Bad stock\n')
 
