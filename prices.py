@@ -74,7 +74,6 @@ file.close()
 #testi = pickle.load(file2)
 #file2.close()
 
-
 #correlations.sort()
 #plt.plot(correlations)
 #plt.show()
